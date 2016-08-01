@@ -4,15 +4,14 @@ class Bowling
 
   def initialize
     @score = 0
+    @spare = 0
   end
   def hit(first, second)
     frame = first + second
-    if @spare
-      frame = frame * 2
-      @spare = false
-    end
+    frame = frame * (1 + @spare)
+    @spare = 0
     if (first + second) == 10
-      @spare = true
+      @spare = 1
     end
     @score += frame
   end
