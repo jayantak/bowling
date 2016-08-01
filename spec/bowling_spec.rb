@@ -35,4 +35,21 @@ RSpec.describe Bowling, "#score" do
       expect(bowling.score).to eq 40
     end
   end
+  context "with strikes" do
+    it "adds the next two scores for a strike and two fours" do
+      bowling = Bowling.new
+      bowling.hit(10)
+      bowling.hit(4, 0)
+      bowling.hit(4, 0)
+      expect(bowling.score).to eq 26
+    end
+    it "adds the next scores for two strikes and two fours" do
+      bowling = Bowling.new
+      bowling.hit(10)
+      bowling.hit(10)
+      bowling.hit(4, 0)
+      bowling.hit(4, 0)
+      expect(bowling.score).to eq 50
+    end
+  end
 end
