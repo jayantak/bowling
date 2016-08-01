@@ -52,4 +52,27 @@ RSpec.describe Bowling, "#score" do
       expect(bowling.score).to eq 50
     end
   end
+  context "with strikes and spares" do
+    it "adds the score correctly for a strike and a spare consecutively" do
+      bowling = Bowling.new
+      bowling.hit(10)
+      bowling.hit(4, 6)
+      bowling.hit(8, 1)
+      expect(bowling.score).to eq 57
+    end
+  end
+  context "with invalid frame values" do
+    it "should not accept frame greater than 10" do
+      bowling = Bowling.new
+      expect { bowling.hit(5, 6) }.to raise_error("Frame cannot be greater than 10")
+    end
+    it "should not accept negative first shot value" do
+      bowling = Bowling.new
+      expect { bowling.hit(-1, 6) }.to raise_error("Shot cannot be negative")
+    end
+    it "should not accept negative second shot value" do
+      bowling = Bowling.new
+      expect { bowling.hit(5, -2) }.to raise_error("Shot cannot be negative")
+    end
+  end
 end
